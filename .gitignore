@@ -36,11 +36,7 @@ TestResults
 Makefile*
 *.*pro*.user*
 *.[oa]
-*.so*
-*.dll
-*.lib
 *.exp
-*.exe
 *.out
 
 #vc files

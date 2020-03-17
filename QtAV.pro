@@ -2,6 +2,7 @@ include(root.pri)
 
 TEMPLATE = subdirs
 CONFIG -= ordered
+CONFIG += static_ffmpeg static_openal
 SUBDIRS = libqtav tools
 libqtav.file = src/libQtAV.pro
 !no-widgets {
@@ -77,10 +78,27 @@ unix:!mac {
 mac|ios {
   !no-videotoolbox: OptionalDepends *= videotoolbox
 }
+
+android:contains(ANDROID_TARGET_ARCH, armeabi-v7a):LIBS += $$PWD/openssl-1.1.1android/lib/armeabi-v7a/libcrypto_1_1.so
+android:contains(ANDROID_TARGET_ARCH, armeabi-v7a):LIBS += $$PWD/openssl-1.1.1android/lib/armeabi-v7a/libssl_1_1.so
+
+android:contains(ANDROID_TARGET_ARCH, arm64-v8a):LIBS += $$PWD/openssl-1.1.1android/lib/arm64-v8a/libcrypto_1_1.so
+android:contains(ANDROID_TARGET_ARCH, arm64-v8a):LIBS += $$PWD/openssl-1.1.1android/lib/arm64-v8a/libssl_1_1.so
+
+android:contains(ANDROID_TARGET_ARCH, x86):LIBS += $$PWD/openssl-1.1.1android/lib/x86/libcrypto_1_1.so
+android:contains(ANDROID_TARGET_ARCH, x86):LIBS += $$PWD/openssl-1.1.1android/lib/x86/libssl_1_1.so
+
+android:contains(ANDROID_TARGET_ARCH, x86_64):LIBS += $$PWD/openssl-1.1.1android/lib/x86_64/libcrypto_1_1.so
+android:contains(ANDROID_TARGET_ARCH, x86_64):LIBS += $$PWD/openssl-1.1.1android/lib/x86_64/libssl_1_1.so
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/openssl-1.1.1ewindows/openssl-1.1/x64/lib/ -llibcrypto
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/openssl-1.1.1ewindows/openssl-1.1/x64/lib/ -llibssl
+
 runConfigTests()
 !config_avresample:!config_swresample {
   error("libavresample or libswresample is required. Setup your environment correctly then delete $$BUILD_DIR/.qmake.conf and run qmake again")
 }
+
 PACKAGE_VERSION = $$QTAV_VERSION
 PACKAGE_NAME= QtAV
 include(pack.pri)
