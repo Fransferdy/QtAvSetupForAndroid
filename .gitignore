@@ -35,7 +35,6 @@ TestResults
 *.git.old*
 Makefile*
 *.*pro*.user*
-*.[oa]
 *.exp
 *.out
 
@@ -58,8 +57,6 @@ Makefile*
 *.ilk
 
 #dirs
-/bin*
-/lib*
 build
 Debug
 Release
