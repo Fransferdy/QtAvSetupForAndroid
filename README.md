@@ -37,6 +37,36 @@ https://github.com/wang-bin/QtAV/issues/1262
 
 Good luck, it took me a few days to get everything working, this repository is 90% of the work, the other 10% is on you.
 
+## Known issues
+
+I have not yet been able to run videos from https sources using qtav, something ssl may be lacking, maybe someone could look into it :)
+
+## Demo
+This is a sample of working video qml screen:
+
+import QtQuick 2.12
+import QtQuick.Controls 2.5
+import QtAV 1.6
+
+Page{
+VideoOutput2 {
+        anchors.right: parent.right
+        anchors.rightMargin: 13
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottomMargin: 15
+        anchors.leftMargin: 14
+        anchors.topMargin: 60
+        source: player
+    }
+
+    AVPlayer {
+        id: player
+        source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    }
+}
+
 # [QtAV](http://www.qtav.org)  [![Build Status](https://travis-ci.org/wang-bin/QtAV.svg)](https://travis-ci.org/wang-bin/QtAV) [![Appveyor](https://ci.appveyor.com/api/projects/status/github/wang-bin/qtav?svg=true&passingText=windows%20-%20OK)](https://ci.appveyor.com/project/wang-bin/qtav)
 
 [![Join the chat at https://gitter.im/QtAV/Lobby](https://badges.gitter.im/QtAV/Lobby.svg)](https://gitter.im/QtAV/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
