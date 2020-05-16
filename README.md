@@ -1,3 +1,42 @@
+# THIS IS A FORK FROM wang/QTAV FOR BUILDING QT AV for ANDROID
+
+The reason for this fork is that the main repository fails to build for android, because of issues with dependencies.
+QtAv requires FFMPEG 3.4 to work on android, it is very hard to find this version of ffmpeg prebuilt to work with newer versions of android (platform 22 to 29) because building it with the newer NDK (21... at the time of this writing) fails with compiler - code issues and also because people simply moved on to ffmpeg 4.2.(but qtav crashes with 4.2 in android)
+
+I have added to this repository a prebuilt version of ffmpeg 3.4.7 for android armeabi-7va, arm64-8va, x86 and x86_64 and modified build scripts to use these dependencies.
+You can look here if you want to build ffmpeg 3.4.7 yourself (you will need an ubuntu machine most likely)
+https://github.com/Javernaut/ffmpeg-android-maker/issues/26
+
+## With this repository you can build QTAV for android platform 22-29 with ffmpeg compiled with the newest ndk to date (5/15/2020).
+
+## Build instructions
+
+Cross compile does not work. You will have to open qt creator and build each separated version by itself. At Project/qmake/details select arm64-v8a, deselect the rest and build, do the same for all archictectures.
+
+I advise to build x86_64 FIRST, there is an issue with X86_64 build, the build for x86_64 will output files with name x86, instead of x86_64, you should rename those files to ...x86.so to ...x86_64.so before building for X86.
+
+The libraries will be COMPILED SUCCESFULY but the BUILD WILL FAIL. This happens because there are issues in building the examples.
+
+After finishing the build process, you will have to go the build directory and run sdk_install.bat using powershell. (shift click in the folder and "Open Powershell Here"),
+this will copy qt_av files to your QT installation folder.
+
+Additionaly, all of these libs are dinamically linked, therefore they will need to be present in your qt project (including ffmpeg3.4.7/lib libs),
+at android/libs/arm64-v8a
+at android/libs/armeabi-7va
+at android/libs/x86
+at android/libs/x86_64
+and you will need the following line in your qt project .pro file:
+QT += av
+android {
+  QT += androidextras
+  ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+}
+
+For more info look at:
+https://github.com/wang-bin/QtAV/issues/1262
+
+Good luck, it took me a few days to get everything working, this repository is 90% of the work, the other 10% is on you.
+
 # [QtAV](http://www.qtav.org)  [![Build Status](https://travis-ci.org/wang-bin/QtAV.svg)](https://travis-ci.org/wang-bin/QtAV) [![Appveyor](https://ci.appveyor.com/api/projects/status/github/wang-bin/qtav?svg=true&passingText=windows%20-%20OK)](https://ci.appveyor.com/project/wang-bin/qtav)
 
 [![Join the chat at https://gitter.im/QtAV/Lobby](https://badges.gitter.im/QtAV/Lobby.svg)](https://gitter.im/QtAV/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

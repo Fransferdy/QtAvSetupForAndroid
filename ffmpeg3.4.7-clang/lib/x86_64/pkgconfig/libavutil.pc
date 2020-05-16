@@ -1,0 +1,14 @@
+prefix=/home/fernando/ffmpeg-android-maker/build/ffmpeg/x86
+exec_prefix=${prefix}
+libdir=/home/fernando/ffmpeg-android-maker/build/ffmpeg/x86/lib
+includedir=/home/fernando/ffmpeg-android-maker/build/ffmpeg/x86/include
+
+Name: libavutil
+Description: FFmpeg utility library
+Version: 55.78.100
+Requires: 
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavutil 
+Libs.private: -lm
+Cflags: -I${includedir}
