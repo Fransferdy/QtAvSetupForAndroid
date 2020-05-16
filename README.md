@@ -44,28 +44,28 @@ I have not yet been able to run videos from https sources using qtav, something 
 ## Demo
 This is a sample of working video qml screen:
 
-import QtQuick 2.12
-import QtQuick.Controls 2.5
-import QtAV 1.6
+    import QtQuick 2.12
+    import QtQuick.Controls 2.5
+    import QtAV 1.6
 
-Page{
-VideoOutput2 {
-        anchors.right: parent.right
-        anchors.rightMargin: 13
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottomMargin: 15
-        anchors.leftMargin: 14
-        anchors.topMargin: 60
-        source: player
-    }
+    Page{
+    VideoOutput2 {
+            anchors.right: parent.right
+            anchors.rightMargin: 13
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.bottomMargin: 15
+            anchors.leftMargin: 14
+            anchors.topMargin: 60
+            source: player
+        }
 
-    AVPlayer {
-        id: player
-        source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        AVPlayer {
+            id: player
+            source: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        }
     }
-}
 
 # [QtAV](http://www.qtav.org)  [![Build Status](https://travis-ci.org/wang-bin/QtAV.svg)](https://travis-ci.org/wang-bin/QtAV) [![Appveyor](https://ci.appveyor.com/api/projects/status/github/wang-bin/qtav?svg=true&passingText=windows%20-%20OK)](https://ci.appveyor.com/project/wang-bin/qtav)
 
