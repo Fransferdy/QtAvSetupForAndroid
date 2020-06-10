@@ -23,6 +23,7 @@
 #include <QtAV/AVPlayer.h>
 #include <QtAV/AudioOutput.h>
 #include <QtAV/VideoCapture.h>
+#include <QtAV/LibAVFilter.h>
 
 template<typename ID, typename T>
 static QStringList idsToNames(QVector<ID> ids) {
@@ -99,6 +100,31 @@ void QmlAVPlayer::classBegin()
     m_metaData.reset(new MediaMetaData());
 
     Q_EMIT mediaObjectChanged();
+}
+
+void QmlAVPlayer::installAudioFilter(const QString options)
+{
+    if (mpAudioFilter) {
+        mpAudioFilter->uninstall();
+        delete mpAudioFilter;
+        mpAudioFilter = 0;
+    }
+    mpAudioFilter = new LibAVFilterAudio(this);
+    mpAudioFilter->setEnabled(true);
+    mpAudioFilter->installTo(mpPlayer);
+    mpAudioFilter->setOptions(options);
+}
+void QmlAVPlayer::installVideoFilter(const QString options)
+{
+    if (mpVideoFilter) {
+        mpVideoFilter->uninstall();
+        delete mpVideoFilter;
+        mpVideoFilter = 0;
+    }
+    mpVideoFilter = new LibAVFilterVideo(this);
+    mpVideoFilter->setEnabled(true);
+    mpPlayer->installFilter(mpVideoFilter);
+    mpVideoFilter->setOptions(options);
 }
 
 void QmlAVPlayer::componentComplete()

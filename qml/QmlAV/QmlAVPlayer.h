@@ -33,6 +33,8 @@
 
 namespace QtAV {
 class AVPlayer;
+class LibAVFilterAudio;
+class LibAVFilterVideo;
 }
 using namespace QtAV;
 class QmlAVPlayer : public QObject, public QQmlParserStatus
@@ -290,6 +292,8 @@ public Q_SLOTS:
     void seek(int offset);
     void seekForward();
     void seekBackward();
+    void installAudioFilter(const QString options);
+    void installVideoFilter(const QString options);
 
 Q_SIGNALS:
     void volumeChanged();
@@ -353,6 +357,8 @@ private Q_SLOTS:
     void applyChannelLayout();
 
 private:
+    QtAV::LibAVFilterVideo *mpVideoFilter=NULL;
+    QtAV::LibAVFilterAudio *mpAudioFilter=NULL;
     static void af_append(QQmlListProperty<QuickAudioFilter> *property, QuickAudioFilter *value);
     static int af_count(QQmlListProperty<QuickAudioFilter> *property);
     static QuickAudioFilter *af_at(QQmlListProperty<QuickAudioFilter> *property, int index);
