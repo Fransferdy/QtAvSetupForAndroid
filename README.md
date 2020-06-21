@@ -9,6 +9,18 @@ https://github.com/Javernaut/ffmpeg-android-maker/issues/26
 
 ## With this repository you can build QTAV for android platform 22-29 with ffmpeg compiled with the newest ndk to date (5/15/2020).
 
+### Extra Features Implemented Here
+
+I added two functions to  Qt Av QML Player
+player.installAudioFilter('filter=value filter2=value2')
+and
+player.installVideoFilter('filter1=value filter2=value2');
+
+You can look at FFMPEG documentation to find available filters for audio and video.
+
+### Known Issues with filters
+Any filter that modifies the audio or video length will break QT AV, I actually built this functionality to be able to change video speed without creating artifacts with sound (using ffmpeg filters for that) , but that fails with QTAV, however other fields that don't mess with video/audio speed and length works, filters such as echo, or others affecting video appearance and all.
+
 ## Build instructions
 
 Cross compile does not work. You will have to open qt creator and build each separated version by itself. At Project/qmake/details select arm64-v8a, deselect the rest and build, do the same for all archictectures.
@@ -21,25 +33,23 @@ After finishing the build process, you will have to go the build directory and r
 this will copy qt_av files to your QT installation folder.
 
 Additionaly, all of these libs are dinamically linked, therefore they will need to be present in your qt project (including ffmpeg3.4.7/lib libs),
-at android/libs/arm64-v8a
-at android/libs/armeabi-7va
-at android/libs/x86
-at android/libs/x86_64
-and you will need the following line in your qt project .pro file:
-QT += av
-android {
-  QT += androidextras
-  ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-}
+      at android/libs/arm64-v8a  
+      at android/libs/armeabi-7va  
+      at android/libs/x86  
+      at android/libs/x86_64  
+and you will need the following line in your qt project .pro file:  
+QT += av  
+android {  
+  QT += androidextras  
+  ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android  
+}  
 
 For more info look at:
 https://github.com/wang-bin/QtAV/issues/1262
 
 Good luck, it took me a few days to get everything working, this repository is 90% of the work, the other 10% is on you.
 
-## Known issues
 
-I have not yet been able to run videos from https sources using qtav, something ssl may be lacking, maybe someone could look into it :)
 
 ## Demo
 This is a sample of working video qml screen:
