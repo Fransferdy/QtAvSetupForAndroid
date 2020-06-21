@@ -22,6 +22,7 @@
 #ifndef QTAV_FILTERCONTEXT_H
 #define QTAV_FILTERCONTEXT_H
 
+#include <QtGui/QPainterPath>
 #include <QtAV/QtAV_Global.h>
 #include <QtCore/QByteArray>
 #include <QtCore/QRect>
