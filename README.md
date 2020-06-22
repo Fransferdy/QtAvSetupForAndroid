@@ -43,13 +43,29 @@ android {
   QT += androidextras  
   ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android  
 }  
+Finally you also have to add openSSL dependencies
+There's a folder openssl-1.1.1android/libs in the repository, just copy its contents to project_dir/android/libs
+
+In Qt Creator in project->qmake->details->Build Android APK->details->Additional Libraries->
+Add the following entries:
+path_to_your_project/android/libs/arm64-v8a/libcrypto_1_1.so  
+path_to_your_project/android/libs/arm64-v8a/libssl_1_1.so  
+path_to_your_project/android/libs/armeabi-7va/libcrypto_1_1.so  
+path_to_your_project/android/libs/armeabi-7va/libssl_1_1.so  
+path_to_your_project/android/libs/x86/libcrypto_1_1.so  
+path_to_your_project/android/libs/x86/libssl_1_1.so  
+path_to_your_project/android/libs/x86_64/libcrypto_1_1.so  
+path_to_your_project/android/libs/x86_64/libssl_1_1.so  
 
 For more info look at:
 https://github.com/wang-bin/QtAV/issues/1262
 
 Good luck, it took me a few days to get everything working, this repository is 90% of the work, the other 10% is on you.
 
+##Running your project
 
+*Remember to always select in QT Creator, all ABIs for building before launching your app, otherwise, most likely the software will crash in the emulator/different phones.
+project->qmake->details->ABIs*
 
 ## Demo
 This is a sample of working video qml screen:
